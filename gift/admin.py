@@ -1,5 +1,5 @@
 from django.contrib import admin
-from award.views import *
+from gift.views import *
 # Register your models here.
 
 admin.site.register(Rate)
