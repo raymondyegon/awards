@@ -50,7 +50,7 @@ class Project(models.Model):
     project_name = models.CharField(max_length=10)
     project_url = models.CharField(max_length=50)
     location = models.CharField(max_length=10)
-    profile = models.ForeignKey(Profile, null=True, related_name='project')
+    profile = models.ForeignKey(Profile,on_delete=models.CASCADE , null=True, related_name='project')
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
     user = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.CASCADE)
@@ -92,8 +92,8 @@ class Rate(models.Model):
     usability = models.CharField(max_length=8)
     creativity = models.CharField(max_length=8, blank=True, null=True)
     average = models.FloatField(max_length=8)
-    user = models.ForeignKey(User, null=True)
-    project = models.ForeignKey(Project, related_name='rate', null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE ,null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='rate', null=True)
 
     def __str__(self):
         return self.design
