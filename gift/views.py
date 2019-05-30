@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Project, Profile, Rate
 from .forms import ProjectForm, ProfileForm, RateForm
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
 import datetime as dt
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -84,7 +85,7 @@ def profile(request, username):
     return render(request, 'profile.html', locals())
     '''
     editing user profile fillform & submission
- 
+
     '''
 
 
@@ -108,48 +109,54 @@ def edit(request):
     '''
 
 
-def logout(request):
-    return render(request, 'home.html')
+# def logout(request):
+#     return render(request, 'home.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home_page')
+    # return render(request, 'home.html')
 
 
 def rate(request):
-    profile = User.objects.get(username=request.user)
+    profile=User.objects.get(username=request.user)
     return render(request, 'rate.html', locals())
 
 
 def view_rate(request, project_id):
-    user = User.objects.get(username=request.user)
-    project = Project.objects.get(pk=project_id)
-    rate = Rate.objects.filter(project_id=project_id)
+    user=User.objects.get(username=request.user)
+    project=Project.objects.get(pk=project_id)
+    rate=Rate.objects.filter(project_id=project_id)
     print(rate)
     return render(request, 'project.html', locals())
 
 
 @login_required(login_url='/accounts/login')
 def rate_project(request, project_id):
-    project = Project.objects.get(pk=project_id)
-    profile = User.objects.get(username=request.user)
+    project=Project.objects.get(pk=project_id)
+    profile=User.objects.get(username=request.user)
     if request.method == 'POST':
-        rateform = RateForm(request.POST, request.FILES)
+        rateform=RateForm(request.POST, request.FILES)
         print(rateform.errors)
         if rateform.is_valid():
-            rating = rateform.save(commit=False)
-            rating.project = project
-            rating.user = request.user
+            rating=rateform.save(commit=False)
+            rating.project=project
+            rating.user=request.user
             rating.save()
             return redirect('vote', project_id)
     else:
-        rateform = RateForm()
+        rateform=RateForm()
     return render(request, 'rate.html', locals())
 
 
 @login_required(login_url='/accounts/login/')
 def vote(request, project_id):
     try:
-        project = Project.objects.get(pk=project_id)
-        rate = Rate.objects.filter(project_id=project_id).all()
+        project=Project.objects.get(pk=project_id)
+        rate=Rate.objects.filter(project_id=project_id).all()
         print([r.project_id for r in rate])
-        rateform = RateForm()
+        rateform=RateForm()
     except DoesNotExist:
         raise Http404()
     return render(request, "project.html", locals())
@@ -157,30 +164,30 @@ def vote(request, project_id):
 
 class ProfileList(APIView):
     def get(self, request, format=None):
-        all_profile = Profile.objects.all()
-        serializers = ProfileSerializer(all_profile, many=True)
+        all_profile=Profile.objects.all()
+        serializers=ProfileSerializer(all_profile, many=True)
         return Response(serializers.data)
 
     def post(self, request, format=None):
-        serializers = ProfileSerializer(data=request.data)
+        serializers=ProfileSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
-    permission_classes = (IsAdminOrReadOnly,)
+    permission_classes=(IsAdminOrReadOnly,)
 
 
 class ProjectList(APIView):
     def get(self, request, format=None):
-        all_project = Project.objects.all()
-        serializers = ProjectSerializer(all_project, many=True)
+        all_project=Project.objects.all()
+        serializers=ProjectSerializer(all_project, many=True)
         return Response(serializers.data)
 
     def post(self, request, format=None):
-        serializers = ProjectSerializer(data=request.data)
+        serializers=ProjectSerializer(data=request.data)
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    permission_classes = (IsAdminOrReadOnly,)
+    permission_classes=(IsAdminOrReadOnly,)
