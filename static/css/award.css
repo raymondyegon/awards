@@ -231,7 +231,7 @@ body{
     margin-right: 10px;
   }
   .home-content{
-      background-image: url(../images/image.jpeg) !important;
+      background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/Nature/6-col/img%20(16).jpg') !important;
       background-attachment: fixed;
       width:100%;
       background-size: cover;
