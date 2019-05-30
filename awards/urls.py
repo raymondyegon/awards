@@ -22,8 +22,8 @@ from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('gift.urls')),
+    # path('logout/',  views.logout, {"next_page": '/'}),
     path('accounts/', include('django_registration.backends.one_step.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    # path('logout/',  views.logout, {"next_page": '/'}),
     path('api-token-auth/', obtain_auth_token),
 ]

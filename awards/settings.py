@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'imagekit',
     'django_registration',
     'gift',
+    'material',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
