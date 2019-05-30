@@ -1,55 +1,277 @@
 {% load bootstrap4 %}
+{% load static %}
 <!DOCTYPE html>
 <html>
+<a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+</a>
+<nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+        <div class="sidebar-brand">
+            <a href="#">AWWARDS</a>
+            <div id="close-sidebar">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="sidebar-header">
+            <div class="user-pic">
+                <img class="img-responsive img-rounded"
+                    src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                    alt="User picture">
+            </div>
+            {% if user.is_authenticated %}
+            <div class="user-info">
+                <span class="user-name">
+                    <strong>{{ user.username}}</strong>
+                </span>
+                <span class="user-role">Administrator</span>
+                <span class="user-status">
+                    <i class="fa fa-circle"></i>
+                    <span>Online</span>
+                </span>
+            </div>
+            {% else%}
+            <div class="user-info">
+                <a href="/accounts/login">
+                    <i class="material-icons">person</i>
+                    <span>LOGIN</span>
+                </a>
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-    font-family: "Lato", sans-serif;
-    transition: background-color .5s;
-}
+            </div>
+            {%endif%}
+        </div>
+        <!-- sidebar-header  -->
+        <div class="sidebar-search">
+            <div>
+                <div class="input-group">
+                    <!-- <form class="navbar-form" role="search" action="{% url 'search_results' %}">
+                        <input type="text" name="search" placeholder="Search.." id="input">
+                    </form> -->
+                    <input type="text" class="form-control search-menu" action="{% url 'search_results' %}" placeholder="Search..." id="input" name="search" >
+                    <div class="input-group-append">
+                        <span class="input-group-text">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar-search  -->
+        <div class="sidebar-menu">
+            <ul>
+                <li class="header-menu">
+                    <span>General</span>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                        <span class="badge badge-pill badge-warning">New</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li>
+                                <a href="#">Dashboard 1
+                                    <span class="badge badge-pill badge-success">Pro</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Dashboard 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Dashboard 3</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span>E-commerce</span>
+                        <span class="badge badge-pill badge-danger">3</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li>
+                                <a href="#">Products
 
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">Orders</a>
+                            </li>
+                            <li>
+                                <a href="#">Credit cart</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="far fa-gem"></i>
+                        <span>Components</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li>
+                                <a href="#">General</a>
+                            </li>
+                            <li>
+                                <a href="#">Panels</a>
+                            </li>
+                            <li>
+                                <a href="#">Tables</a>
+                            </li>
+                            <li>
+                                <a href="#">Icons</a>
+                            </li>
+                            <li>
+                                <a href="#">Forms</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-chart-line"></i>
+                        <span>Charts</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li>
+                                <a href="#">Pie chart</a>
+                            </li>
+                            <li>
+                                <a href="#">Line chart</a>
+                            </li>
+                            <li>
+                                <a href="#">Bar chart</a>
+                            </li>
+                            <li>
+                                <a href="#">Histogram</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="sidebar-dropdown">
+                    <a href="#">
+                        <i class="fa fa-globe"></i>
+                        <span>Maps</span>
+                    </a>
+                    <div class="sidebar-submenu">
+                        <ul>
+                            <li>
+                                <a href="#">Google maps</a>
+                            </li>
+                            <li>
+                                <a href="#">Open street map</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <!-- <li class="header-menu">
+                    <span>Extra</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-book"></i>
+                        <span>Documentation</span>
+                        <span class="badge badge-pill badge-primary">Beta</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-calendar"></i>
+                        <span>Calendar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-folder"></i>
+                        <span>Examples</span>
+                    </a>
+                </li>
+            </ul> -->
+        </div>
+        <!-- sidebar-menu  -->
+    </div>
+    <!-- sidebar-content  -->
+    {% if user.is_authenticated %}
+    <div class="sidebar-footer">
+        <a href="#">
+            <i class="fa fa-bell"></i>
+            <span class="badge badge-pill badge-warning notification"></span>
+        </a>
+        <a href="#">
+            <i class="fa fa-envelope"></i>
+            <span class="badge badge-pill badge-success notification"></span>
+        </a>
+        <a href="#">
+            <i class="fa fa-cog"></i>
+            <span class="badge-sonar"></span>
+        </a>
+        <a href="/logout">
+            <i class="fa fa-power-off"></i>
+        </a>
+    </div>
+    {% else%}
+    <div class="sidebar-footer">
+        <a href="/accounts/login">
+            <i class="material-icons">person</i>
+            <span>LOGIN</span>
+        </a>
+    </div>
+    {% endif%}
+</nav>
 
-.sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
-}
+<!-- <body class="fixed-sn light-blue-skin">
+   
 
-.sidenav a:hover {
-    color: #f1f1f1;
-}
-
-.sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
+    <ul id="slide-out" class="sidenav">
 
 
-</style>
+        <li>
+            <div class="row valign-wrapper">
+                <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(10).jpg" alt=""
+                    class="circle responsive-img">
+            </div>
 
-</head>
+            <a href="{% url 'home_page' %}"> <i class="material-icons">home</i> Home</a>
+            <a href="#name"><i class="material-icons">person</i>John Doe</a> -->
+<!-- <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a> -->
 
-<body>
+<!-- </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="material-icons">settings</i> settings
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#"> <i class="material-icons">build</i> Edit Profile</a>
+                <a class="dropdown-item" href="#"> <i class="material-icons">create</i>Change Password</a>
+
+            </div>
+        </li>
+        <li>
+            <a href=""><i class="material-icons">create</i>Submit Site</a>
+        </li>
+        <li>
+            <a href=""><i class="material-icons">power_settings_new</i>Logout</a>
+        </li>
+
+    </ul>
+
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
+
+<!--Main Navigation-->
+
+<!-- Dropdown Structure -->
+
+
+<!-- </body> -->
+
+<!-- <body>
     <div class="container-fluid">
         <div id=" mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -79,7 +301,8 @@
                 <div class="col-md-2" id="drop">
                     {% if user.is_authenticated %}
                     <ul class="" style="position:absolute;">
-                        <li class="dropdown btn profile-settings-btn" style="list-style:none;" aria-label="profile settings">
+                        <li class="dropdown btn profile-settings-btn" style="list-style:none;"
+                            aria-label="profile settings">
                             <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
                                 aria-expanded="false"><i class="fa fa-cog" aria-hidden="true"></i>
                             </a>
@@ -103,7 +326,8 @@
                     {% else %}
                     <li style="list-style: none;">
                         <a href="/accounts/register/" style="color:black; font-size: 13px;">REGISTER /</a>
-                        <a class='btn btn-default' href="/accounts/login" style="color:black; font-size: 13px;">LOGIN</a>
+                        <a class='btn btn-default' href="/accounts/login"
+                            style="color:black; font-size: 13px;">LOGIN</a>
                     </li>
 
                     {% endif %}
@@ -112,26 +336,14 @@
                     <h1 class="profile-user-name" style="font-size: 14px;">{{profile.username}}</h1>
                     {% endif %}
                 </div>
-                <div class="col-md-2" style="text-align: center; padding-top: 16px; font-size: 13px; color:white;background-color: #42AB9E;">
+                <div class="col-md-2"
+                    style="text-align: center; padding-top: 16px; font-size: 13px; color:white;background-color: #42AB9E;">
                     <a href="{%url 'upload_project'%}" style="color: white;">SUBMIT YOUR SITE!</a>
                 </div>
             </div>
         </div>
-
-        <script>
-            function openNav() {
-                document.getElementById("mySidenav").style.width = "250px";
-                document.getElementById("main").style.marginLeft = "250px";
-                document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-            }
-
-            function closeNav() {
-                document.getElementById("mySidenav").style.width = "0";
-                document.getElementById("main").style.marginLeft = "0";
-                document.body.style.backgroundColor = "white";
-            }
-        </script>
     </div>
-</body>
+</body> -->
+
 
 </html>

@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}"/> -->
+  <link rel="icon" type="image/png" href="{% static 'images/icon.png' %}" />
   {%if title%}
 
   <title>{{title}}</title>
@@ -24,12 +24,13 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.1/css/mdb.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/award.css' %}">
   {% endblock %}
 
 </head>
 
 <body>
+  {% include 'material/includes/material_css.html' %}
+  {% include 'material/includes/material_js.html' %}
   {% block content %}
   {%endblock%}
 

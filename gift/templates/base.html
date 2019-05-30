@@ -15,24 +15,31 @@
 
     {% block styles %}
     {% bootstrap_css %}
+    <!--Import Google Icon Font-->
     <link rel="stylesheet" href="{% static 'css/award.css' %}">
-    <title>Awwards</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/navbar.css'%}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
     {% endblock %}
 
 </head>
 
-<body>
+<body class="page-wrapper chiller-theme toggled">
     {% include "navbar.html" %}
-
     {% block content %}
 
     {%endblock%}
 
-
     {% block scripts %}
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     {% bootstrap_javascript jquery='full' %}
+    <script src="{% static 'css/main.js' %}"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="{% static 'js/navbar.js'%}"></script>
     {% endblock %}
 </body>
 
